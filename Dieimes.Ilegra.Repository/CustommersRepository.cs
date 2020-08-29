@@ -13,7 +13,7 @@ namespace Dieimes.Ilegra.Repository
         FileInfo _fileInfo;
         public CustommersRepository(FileInfo fileInfo)
         {
-            _fileInfo = fileInfo
+            _fileInfo = fileInfo;
         }
         public List<Custommer> GetCustommers()
         {

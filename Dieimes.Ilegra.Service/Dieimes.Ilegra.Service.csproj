@@ -45,6 +45,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaleService.cs" />
     <Compile Include="SalesManService.cs" />
+    <Compile Include="Util\FileService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dieimes.Ilegra.Domain\Dieimes.Ilegra.Domain.csproj">
@@ -52,8 +53,6 @@
       <Name>Dieimes.Ilegra.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Util\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
