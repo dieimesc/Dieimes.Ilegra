@@ -8,6 +8,14 @@ namespace Dieimes.Ilegra.Domain
 {
     public class SalesMan
     {
+        public SalesMan(string id, string cpf, string name, decimal salary)
+        {
+            Id = id;
+            Cpf = cpf;
+            Name = name;
+            Salary = salary;
+        }
+
         public string Id { get; set; }
         public string Cpf { get; set; }
         public string Name { get; set; }

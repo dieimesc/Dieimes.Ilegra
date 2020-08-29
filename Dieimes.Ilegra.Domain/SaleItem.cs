@@ -8,6 +8,13 @@ namespace Dieimes.Ilegra.Domain
 {
     public class SaleItem
     {
+        public SaleItem(long id, int quantity, decimal price)
+        {
+            Id = id;
+            Quantity = quantity;
+            Price = price;
+        }
+
         public long Id { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }

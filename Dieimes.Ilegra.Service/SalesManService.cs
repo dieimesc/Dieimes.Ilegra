@@ -8,9 +8,12 @@ using System.Threading.Tasks;
 namespace Dieimes.Ilegra.Service
 {
     public class SalesManService
-    {        public IList<SalesMan> GetSalesMen()
+    {       
+        public IList<SalesMan> GetSalesMen()
         {
-
+            return null;
         }
+        
+
     }
 }

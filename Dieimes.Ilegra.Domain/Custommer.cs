@@ -8,6 +8,15 @@ namespace Dieimes.Ilegra.Domain
 {
     public class Custommer
     {
+        public Custommer(string id, string cnpj, string name, string bussines, string area)
+        {
+            Id = id;
+            Cnpj = cnpj;
+            Name = name;
+            Bussines = bussines;
+            Area = area;
+        }
+
         public string  Id { get; set; }
         public string Cnpj { get; set; }
         public string Name { get; set; }

@@ -8,9 +8,17 @@ namespace Dieimes.Ilegra.Domain
 {
     public class Sale
     {
+        public Sale(string id, string saleId, SaleItem saleItem, string salesManName)
+        {
+            Id = id;
+            SaleId = saleId;
+            SaleItem = saleItem;
+            SalesManName = salesManName;
+        }
+
         public string Id { get; set; }
         public string SaleId { get; set; }
-        public List<SaleItem> SaleItems { get; set; }
-        public SalesMan SalesManName { get; set; }
+        public SaleItem SaleItem { get; set; }
+        public string SalesManName { get; set; }
     }
 }
