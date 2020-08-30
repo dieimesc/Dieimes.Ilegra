@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dieimes.Ilegra.Service.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace Dieimes.Ilegra
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            FileService.StartRead(AppDomain.CurrentDomain.BaseDirectory + "//data/in//",
+                                  AppDomain.CurrentDomain.BaseDirectory + "//data/out//").Start();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Dieimes.Ilegra.Service
     {
         public IList<Custommer> GetCustommers()
         {
-
+            return null;
         }
     }
 }

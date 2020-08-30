@@ -8,17 +8,34 @@ namespace Dieimes.Ilegra.Domain
 {
     public class Sale
     {
-        public Sale(string id, string saleId, SaleItem saleItem, string salesManName)
+        private List<SaleItem> _saleItems;
+
+        public Sale()
+        {
+        }
+
+        public Sale(string id, string saleId,  string salesManName)
         {
             Id = id;
-            SaleId = saleId;
-            SaleItem = saleItem;
+            SaleId = saleId;          
             SalesManName = salesManName;
+            _saleItems = new List<SaleItem>();
+        }
+        public void AddSaleItem(SaleItem saleItem)
+        {
+            _saleItems.Add(saleItem);
+        }
+        public decimal Total
+        {
+            get
+            {
+                return _saleItems.Sum(p => p.Price);
+            }
         }
 
         public string Id { get; set; }
         public string SaleId { get; set; }
-        public SaleItem SaleItem { get; set; }
+        public List<SaleItem> SaleItems { get { return _saleItems; } }
         public string SalesManName { get; set; }
     }
 }

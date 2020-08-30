@@ -26,7 +26,7 @@ namespace Dieimes.Ilegra.Domain
         {
             _custommers.Add(custommer);
         }
-        public void AddSalers(Sale sale)
+        public void AddSales(Sale sale)
         {
             _sales.Add(sale);
         }
@@ -34,26 +34,22 @@ namespace Dieimes.Ilegra.Domain
         {
             return _custommers.Count();
         }
-        public long SalesCount()
+        public long SalesManCount()
         {
             return _salesMen.Count();
         }
         public Sale GetExpansiveSale()
         {
-            return _sales.Find( p => p.SaleItem.Price == _sales.Max(prop => prop.SaleItem.Price));
+            return _sales.Find(v => v.Total == _sales.Max(prop => prop.Total));
         }
         public SalesMan GetWorstSalesMan()
         {
-           
-           Dictionary<SalesMan, decimal> _salesByMan = new Dictionary<SalesMan, decimal>();
-           foreach(SalesMan _saleMan in _salesMen)
-           {
-               _salesByMan.Add(_saleMan, _sales.Sum(p => p.SaleItem.Price));
-           }                     
+            var salesBySalesMan = _sales.GroupBy(p => p.SalesManName)
+                .Select(gp => new { SalesName = gp.Key, Total = gp.Select(p => p.Total).ToList()[0] }).ToList();
 
-            return
-              _salesByMan.First(p => p.Value == _salesByMan.Min(p => p.Value)).Key;
 
+            return _salesMen.Find(p => p.Name == salesBySalesMan.OrderBy(o => o.Total).First().SalesName);
+            
         }
 
     }

@@ -94,7 +94,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Dieimes.Ilegra.Service\Dieimes.Ilegra.Service.csproj">
+      <Project>{EBD3B5D0-6774-4BF5-954F-3FE65B19A933}</Project>
+      <Name>Dieimes.Ilegra.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Content\Imagens\Start.ico" />
   </ItemGroup>

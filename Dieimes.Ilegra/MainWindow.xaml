@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dieimes.Ilegra"
         mc:Ignorable="d"
-        Title="Ilegra Data Reader" Height="450" Width="800">
-    <Grid>
-        <Button Style="{ StaticResource btnStart }" >Start</Button>
+        Title="Ilegra Data Reader" Height="227" Width="800">
+    <Grid Margin="0,0,0,-21">
+        <Button Style="{ StaticResource btnStart }" Click="Button_Click" >Iniciar Leitura</Button>
 
     </Grid>
 </Window>

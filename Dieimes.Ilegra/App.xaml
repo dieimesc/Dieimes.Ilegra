@@ -8,9 +8,9 @@
             <Setter Property="SnapsToDevicePixels" Value="True" />
             <Setter Property="Foreground" Value="FloralWhite" />
             <Setter Property="Background" Value="Gray" />
-            <Setter Property="Width" Value="120" />
+            <Setter Property="Width" Value="150" />
             <Setter Property="Height" Value="40" />
-            <Setter Property="MaxWidth"  Value="120" />
+            <Setter Property="MaxWidth"  Value="200" />
             <Setter Property="MaxHeight"  Value="40" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontFamily" Value="Calibri" />
@@ -32,7 +32,7 @@
                                 <ContentPresenter.Content>
                                     <StackPanel Orientation="Horizontal" Width="191" Height="40" >
                                         <Image Source="Content/Imagens/start.ico" Width="25" Height="25" Margin="5,0,0,0"/>
-                                        <TextBlock Text="Start" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="DemiBold"  Width="84" Height="22"
+                                        <TextBlock Text="Iniciar Leitura" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="DemiBold"  Width="100" Height="22"
                                       Margin="10" />
                                     </StackPanel>
                                 </ContentPresenter.Content>

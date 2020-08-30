@@ -13,32 +13,33 @@ namespace Dieimes.Ilegra.Service.Util
 {
     public static class FileService
     {
-        public static Thread StartRead(string pathIn)
+        public static Thread StartRead(string pathIn, string pathOut)
         {
             while(true)
             {
                 if(Directory.Exists(pathIn))
                 {
-                    foreach(FileInfo fileInfo in new DirectoryInfo(pathIn).GetFiles())
+                    OutFile outFile = new OutFile();
+                    foreach (FileInfo fileInfo in new DirectoryInfo(pathIn).GetFiles())
                     {
-                        using (StreamReader streamReader = new StreamReader(fileInfo.FullName))
+                        using (StreamReader streamReader = new StreamReader(fileInfo.FullName, encoding: Encoding.UTF8))
                         {
                             while(!streamReader.EndOfStream)
                             {
                                 var line = streamReader.ReadLine();
                                 var entityType = GetType(line);
 
-                                if(entityType.GetType() == typeof(Custommer))
+                                if(entityType == typeof(Custommer))
                                 {
-                                    CreateCustommer(line);
+                                   outFile.AddCustommer(CreateCustommer(line));
                                 }
-                                if (entityType.GetType() == typeof(Sale))
+                                if (entityType == typeof(Sale))
                                 {
-                                    CreateSale(line);
+                                    outFile.AddSales(CreateSale(line));
                                 }
-                                if (entityType.GetType() == typeof(SalesMan))
+                                if (entityType == typeof(SalesMan))
                                 {
-                                    CreateSalesMan(line);
+                                    outFile.AddSalesMan(CreateSalesMan(line));
                                 }
                                 else
                                 {
@@ -47,22 +48,48 @@ namespace Dieimes.Ilegra.Service.Util
 
                             }
 
-                            OutFile outFile = new OutFile();
-
-                            WriteOutFile(OutFile)
+                            streamReader.Close();                                                       
                         }
                         
                     }
+                    if (!Directory.Exists(pathOut))
+                        Directory.CreateDirectory(pathOut);                   
+                   
+                    WriteOutFile(outFile, pathOut + "//Arquivo de saida.txt");
+                }
+                else
+                {
+                    Directory.CreateDirectory(pathIn);
                 }
             }
 
         }
+
+        private static void WriteOutFile(OutFile outFile, string pathOut)
+        {
+            using(StreamWriter streamWriter = new StreamWriter(pathOut, false))
+            {
+                var custommersCount = outFile.CustommersCount();
+                var salesManCount = outFile.SalesManCount();
+                var salesExpansiveId = outFile.GetExpansiveSale()?.Id;
+                var worstSalesMan = outFile.GetWorstSalesMan()?.Name;
+
+                streamWriter.WriteLine("Quantidade de clientes:" + custommersCount);
+                streamWriter.WriteLine("Quantidade de Vendedores:" + salesManCount);
+                streamWriter.WriteLine("Id da Venda mais cara:" + salesExpansiveId );
+                streamWriter.WriteLine("Pior Vendedor:" + (worstSalesMan == null ? "" : worstSalesMan));
+                
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+        }
+
         public static Custommer CreateCustommer(string data)
         {
             try
             {
                 var props = data.Split('ç');
-                return new Custommer(props[0], props[1], props[2], props[3], props[4]);
+                return new Custommer(props[0], props[1], props[2], props[3]);
             }
             catch
             {
@@ -75,13 +102,21 @@ namespace Dieimes.Ilegra.Service.Util
             try
             {
                 var props = data.Split('ç');
-                string item = props[2];
-                string[] itemProps = item.Replace("[", "").Replace("]", "").Split('-');
-                var saleItem = new SaleItem(long.Parse(itemProps[0]), int.Parse(itemProps[1]), decimal.Parse(itemProps[2]));
-               
-                return new Sale(props[0], props[1], saleItem, props[2]);
+                string item = props[2];                
+                Sale sale = new Sale(props[0], props[1], props[3]);
+
+                string[] items = item.Replace("[", "").Replace("]", "").Split(',');
+                foreach(var strItem in items)
+                {
+                    var propItems = strItem.Split('-');
+                    var saleItem = new SaleItem(long.Parse(propItems[0]), int.Parse(propItems[1]), decimal.Parse(propItems[2]));
+                    sale.AddSaleItem(saleItem);
+
+                }
+
+                return sale;
             }
-            catch
+            catch(Exception e)
             {
                 return null;
             }
@@ -107,13 +142,13 @@ namespace Dieimes.Ilegra.Service.Util
             switch(strTipo)
             {
                 case "001":
-                    return typeof(SalesMan);
+                    return new SalesMan().GetType();
 
                 case "002":
-                    return typeof(Custommer);
+                    return new Custommer().GetType();
 
                 case "003":
-                    return typeof(Sale);
+                    return new Sale().GetType();
 
                 default:
                     return null;
