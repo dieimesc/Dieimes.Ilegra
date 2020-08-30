@@ -42,10 +42,14 @@ namespace Dieimes.Ilegra.Service.Util
                                 }
                                 else
                                 {
-
+                                    continue;
                                 }
 
                             }
+
+                            OutFile outFile = new OutFile();
+
+                            WriteOutFile(OutFile)
                         }
                         
                     }
@@ -96,13 +100,7 @@ namespace Dieimes.Ilegra.Service.Util
         }
 
 
-        public static Thread StartWrite(string pathOut)
-        {
-            while(true)
-            {
-
-            }
-        }
+       
         private static Type GetType(string line)
         {
             var strTipo = line.Substring(0, 3);
