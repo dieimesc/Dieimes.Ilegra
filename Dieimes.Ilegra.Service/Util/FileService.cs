@@ -15,53 +15,60 @@ namespace Dieimes.Ilegra.Service.Util
     {
         public static Thread StartRead(string pathIn, string pathOut)
         {
-            while(true)
+            return new Thread(() =>
             {
-                if(Directory.Exists(pathIn))
+
+                while (true)
                 {
-                    OutFile outFile = new OutFile();
-                    foreach (FileInfo fileInfo in new DirectoryInfo(pathIn).GetFiles())
+                    if (Directory.Exists(pathIn))
                     {
-                        using (StreamReader streamReader = new StreamReader(fileInfo.FullName, encoding: Encoding.UTF8))
+                        OutFile outFile = new OutFile();
+                        foreach (FileInfo fileInfo in new DirectoryInfo(pathIn).GetFiles())
                         {
-                            while(!streamReader.EndOfStream)
+                            using (StreamReader streamReader = new StreamReader(fileInfo.FullName, encoding: Encoding.UTF8))
                             {
-                                var line = streamReader.ReadLine();
-                                var entityType = GetType(line);
+                                while (!streamReader.EndOfStream)
+                                {
+                                    var line = streamReader.ReadLine();
+                                    var entityType = GetType(line);
 
-                                if(entityType == typeof(Custommer))
-                                {
-                                   outFile.AddCustommer(CreateCustommer(line));
-                                }
-                                if (entityType == typeof(Sale))
-                                {
-                                    outFile.AddSales(CreateSale(line));
-                                }
-                                if (entityType == typeof(SalesMan))
-                                {
-                                    outFile.AddSalesMan(CreateSalesMan(line));
-                                }
-                                else
-                                {
-                                    continue;
+                                    if (entityType == typeof(Custommer))
+                                    {
+                                        outFile.AddCustommer(CreateCustommer(line));
+                                    }
+                                    if (entityType == typeof(Sale))
+                                    {
+                                        outFile.AddSales(CreateSale(line));
+                                    }
+                                    if (entityType == typeof(SalesMan))
+                                    {
+                                        outFile.AddSalesMan(CreateSalesMan(line));
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
+
                                 }
 
+                                streamReader.Close();
                             }
 
-                            streamReader.Close();                                                       
                         }
-                        
+                        if (!Directory.Exists(pathOut))
+                            Directory.CreateDirectory(pathOut);
+
+                        WriteOutFile(outFile, pathOut + "//Arquivo de saida.tmp");
+                        File.Copy(pathOut + "//Arquivo de saida.tmp", pathOut + "//Arquivo de saida.txt", true);
+
                     }
-                    if (!Directory.Exists(pathOut))
-                        Directory.CreateDirectory(pathOut);                   
-                   
-                    WriteOutFile(outFile, pathOut + "//Arquivo de saida.txt");
+                    else
+                    {
+                        Directory.CreateDirectory(pathIn);
+                    }
                 }
-                else
-                {
-                    Directory.CreateDirectory(pathIn);
-                }
-            }
+            });
+
 
         }
 
@@ -72,12 +79,12 @@ namespace Dieimes.Ilegra.Service.Util
                 var custommersCount = outFile.CustommersCount();
                 var salesManCount = outFile.SalesManCount();
                 var salesExpansiveId = outFile.GetExpansiveSale()?.Id;
-                var worstSalesMan = outFile.GetWorstSalesMan()?.Name;
+                var worstSalesMan = outFile.GetWorstSalesManName();
 
                 streamWriter.WriteLine("Quantidade de clientes:" + custommersCount);
                 streamWriter.WriteLine("Quantidade de Vendedores:" + salesManCount);
                 streamWriter.WriteLine("Id da Venda mais cara:" + salesExpansiveId );
-                streamWriter.WriteLine("Pior Vendedor:" + (worstSalesMan == null ? "" : worstSalesMan));
+                streamWriter.WriteLine("Pior Vendedor: " + worstSalesMan);
                 
                 streamWriter.Flush();
                 streamWriter.Close();

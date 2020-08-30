@@ -58,6 +58,114 @@
             </Setter>
 
         </Style>
+        <Style TargetType="Button" x:Key="btnEntrada" >
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Foreground" Value="FloralWhite" />
+            <Setter Property="Background" Value="Gray" />
+            <Setter Property="Width" Value="150" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="MaxWidth"  Value="200" />
+            <Setter Property="MaxHeight"  Value="40" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Calibri" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="LightGray"></DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Template">
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                    BorderBrush="YellowGreen" BorderThickness="1" CornerRadius="15,15,15,15" x:Name="bd">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                    Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True">
+                                <ContentPresenter.Content>
+                                    <StackPanel Orientation="Horizontal" Width="191" Height="40" >
+                                        
+                                        <TextBlock Text="Abrir Pasta de Entrada" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="DemiBold"  Width="150" Height="22"
+                                      Margin="10" />
+                                    </StackPanel>
+                                </ContentPresenter.Content>
+
+                            </ContentPresenter>
+
+
+
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="GreenYellow"/>
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+        <Style TargetType="Button" x:Key="btnSaida" >
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="Foreground" Value="FloralWhite" />
+            <Setter Property="Background" Value="Gray" />
+            <Setter Property="Width" Value="190" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="MaxWidth"  Value="200" />
+            <Setter Property="MaxHeight"  Value="40" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="Calibri" />
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="LightGray"></DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Template">
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                    BorderBrush="YellowGreen" BorderThickness="1" CornerRadius="15,15,15,15" x:Name="bd">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                    Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True">
+                                <ContentPresenter.Content>
+                                    <StackPanel Orientation="Horizontal" Width="191" Height="40" >
+
+                                        <TextBlock Text="Abrir Pasta de Saída" VerticalAlignment="Center" Foreground="White" FontSize="16" FontWeight="DemiBold"  Width="150" Height="22"
+                                      Margin="10" />
+                                    </StackPanel>
+                                </ContentPresenter.Content>
+
+                            </ContentPresenter>
+
+
+
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="GreenYellow"/>
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+
+        </Style>
 
     </Application.Resources>
 </Application>

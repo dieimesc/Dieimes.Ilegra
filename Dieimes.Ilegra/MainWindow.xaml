@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dieimes.Ilegra"
         mc:Ignorable="d"
-        Title="Ilegra Data Reader" Height="227" Width="800">
-    <Grid Margin="0,0,0,-21">
-        <Button Style="{ StaticResource btnStart }" Click="Button_Click" >Iniciar Leitura</Button>
+        Title="Ilegra Data Reader" Height="287" Width="800">
+    <Grid Margin="0,0,0,-71">
+        <Button x:Name="btnStart" FontSize="20"  Click="Button_Click" Margin="320,25,322,232" >Iniciar Leitura</Button>
+        <Button Style="{ StaticResource btnEntrada }" Click="Button_Click_1"  Margin="195,144,427,123" Width="Auto" >Abrir pasta de entrada</Button>
+        <Button Style="{ StaticResource btnSaida }" Click="Button_Click_2"  Margin="430,144,197,123" Width="Auto" >Iniciar Leitura</Button>
 
     </Grid>
 </Window>

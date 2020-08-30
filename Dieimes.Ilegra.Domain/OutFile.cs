@@ -42,13 +42,14 @@ namespace Dieimes.Ilegra.Domain
         {
             return _sales.Find(v => v.Total == _sales.Max(prop => prop.Total));
         }
-        public SalesMan GetWorstSalesMan()
+        public string GetWorstSalesManName()
         {
             var salesBySalesMan = _sales.GroupBy(p => p.SalesManName)
                 .Select(gp => new { SalesName = gp.Key, Total = gp.Select(p => p.Total).ToList()[0] }).ToList();
 
 
-            return _salesMen.Find(p => p.Name == salesBySalesMan.OrderBy(o => o.Total).First().SalesName);
+            return salesBySalesMan.OrderBy(o => o.Total).ToList().First().SalesName;
+            
             
         }
 
